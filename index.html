@@ -21,13 +21,15 @@
   </head>
   <body>
     <h3>City Guesser</h3>
-    <input id="clickMe" type="button" value="New Location" onclick="object.onload();" />
+    <input id="clickMe" type="button" value="Guess" onclick="makeGuess();" />
     <object id="places" data="places.json"></object>
     <div id="map"></div>
     <script>
       var map;
       var latlongs;
       var randomCity;
+      function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
+      var minZoomLevel = 15;
 
       var object = document.getElementById("places");
       object.onload = function() {
@@ -35,9 +37,6 @@
         randomCity = latlongs[getRandomInt(latlongs.length)];
         initMap();
       };
-
-      function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
-      var minZoomLevel = 15;
 
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -51,6 +50,16 @@
           });;
         }
 
+        function makeGuess() {
+          var guess = prompt("Take a guess!");
+          if (guess == randomCity.name){
+            alert("That's right!!!!");
+          }
+          else {
+            alert("Nope. The answer was " + randomCity.name);
+          }
+          object.onload();
+        }
 
     </script>
 
