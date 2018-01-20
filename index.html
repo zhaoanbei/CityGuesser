@@ -21,6 +21,7 @@
   </head>
   <body>
     <h3>City Guesser</h3>
+
     <input id="clickMe" type="button" value="Guess" onclick="makeGuess();" />
     <object id="places" data="places.json"></object>
     <div id="map"></div>
@@ -30,6 +31,7 @@
       var randomCity;
       function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
       var minZoomLevel = 15;
+      var points = 0;
 
       var object = document.getElementById("places");
       object.onload = function() {
@@ -52,8 +54,9 @@
 
         function makeGuess() {
           var guess = prompt("Take a guess!");
-          if (guess == randomCity.name){
-            alert("That's right!!!!");
+          if (guess.toLowerCase() == randomCity.name.toLowerCase()){
+            points = points + 10;
+            alert("That's right!!!! You now have " + points + " points!" );
           }
           else {
             alert("Nope. The answer was " + randomCity.name);
