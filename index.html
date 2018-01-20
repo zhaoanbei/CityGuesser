@@ -21,11 +21,14 @@
   </head>
   <body>
     <h3>City Guesser</h3>
+    <div id="score"> </div>
 
-    <form>
+    <form action="">
      <input id="guess" type="text" placeholder="Guess a City" name="Guess a City">
-     <input type="submit" value="Guess" onclick="makeGuess();">
-   </form>
+     <a href="#" onclick="makeGuess();">Guess</a>
+    </form>
+
+
 
     <object id="places" data="places.json"></object>
     <div id="map"></div>
@@ -33,11 +36,28 @@
       var map;
       var latlongs;
       var randomCity;
-      function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
       var minZoomLevel = 15;
       var points = 0;
 
+      function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
+
       var object = document.getElementById("places");
+
+      function makeGuess() {
+        var guess = document.getElementById("guess").value;
+        if (guess.toLowerCase() === randomCity.name.toLowerCase()){
+          points = points + 10;
+          document.getElementById("score").innerHTML = "That's right!!!! You now have " + points + " points!";
+
+        }
+        else {
+          document.getElementById("score").innerHTML = "Nope. The answer was " + randomCity.name;
+        }
+        object.onload();
+      }
+
+      document.getElementById("score").innerHTML = "Points: " + points;
+
       object.onload = function() {
         latlongs = eval(object.contentDocument.body.childNodes[0].innerHTML);
         randomCity = latlongs[getRandomInt(latlongs.length)];
@@ -56,17 +76,11 @@
           });;
         }
 
-        function makeGuess() {
-          var guess = document.getElementById("guess").value;
-          if (guess.toLowerCase() == randomCity.name.toLowerCase()){
-            points = points + 10;
-            alert("That's right!!!! You now have " + points + " points!" );
-          }
-          else {
-            alert("Nope. The answer was " + randomCity.name);
-          }
-          object.onload();
-        }
+        $(document).on("keypress", ":input:not(textarea)", function(event) {
+          return event.keyCode != 13;
+          makeGuess();
+          });
+
 
     </script>
 
