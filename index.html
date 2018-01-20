@@ -21,6 +21,7 @@
   </head>
   <body>
     <h3>City Guesser</h3>
+    <input id="clickMe" type="button" value="New Location" onclick="object.onload();" />
     <object id="places" data="places.json"></object>
     <div id="map"></div>
     <script>
@@ -42,7 +43,8 @@
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: randomCity.lat, lng: randomCity.lng},
           zoom: minZoomLevel,
-          mapTypeId: 'satellite'
+          mapTypeId: 'satellite',
+          disableDefaultUI: true
         })
           google.maps.event.addListener(map, 'zoom_changed', function() {
           if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
