@@ -22,6 +22,7 @@
   <body>
     <h3>City Guesser</h3>
     <div id="score"> </div>
+    <div id="message"> </div>
 
     <form action="">
      <input id="guess" type="text" placeholder="Guess a City" name="Guess a City">
@@ -41,22 +42,25 @@
 
       function getRandomInt(max) {return Math.floor(Math.random() * Math.floor(max));}
 
+      document.getElementById("score").innerHTML = "Points: " + points;
       var object = document.getElementById("places");
 
       function makeGuess() {
         var guess = document.getElementById("guess").value;
         if (guess.toLowerCase() === randomCity.name.toLowerCase()){
           points = points + 10;
-          document.getElementById("score").innerHTML = "That's right!!!! You now have " + points + " points!";
+          document.getElementById("message").innerHTML = "That's right!!!!";
+          document.getElementById("score").innerHTML = "Points: " + points;
 
         }
         else {
-          document.getElementById("score").innerHTML = "Nope. The answer was " + randomCity.name;
+          document.getElementById("message").innerHTML = "Nope. The answer was " + randomCity.name;
+          document.getElementById("score").innerHTML = "Points: " + points;
         }
         object.onload();
       }
 
-      document.getElementById("score").innerHTML = "Points: " + points;
+      //document.getElementById("score").innerHTML = "Points: " + points;
 
       object.onload = function() {
         latlongs = eval(object.contentDocument.body.childNodes[0].innerHTML);
