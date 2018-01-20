@@ -22,7 +22,13 @@
   <body>
     <h3>City Guesser</h3>
 
-    <input id="clickMe" type="button" value="Guess" onclick="makeGuess();" />
+    <form>
+     <input id="guess" type="text" placeholder="Guess a City" name="Guess a City">
+     <input type="submit" value="Guess" onclick="makeGuess();">
+   </form>
+
+
+
     <object id="places" data="places.json"></object>
     <div id="map"></div>
     <script>
@@ -53,7 +59,7 @@
         }
 
         function makeGuess() {
-          var guess = prompt("Take a guess!");
+          var guess = document.getElementById("guess").value;
           if (guess.toLowerCase() == randomCity.name.toLowerCase()){
             points = points + 10;
             alert("That's right!!!! You now have " + points + " points!" );
